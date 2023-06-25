@@ -10,8 +10,9 @@ async function getData(url) {
   }
 
   export async function postData(url , body){
+    const bodyData=JSON.parse(body)
     const response =
-     await axios.post(url,body)
+     await axios.post(url,bodyData)
     .then(response => response.data)
     .catch(error => error);
     return response;

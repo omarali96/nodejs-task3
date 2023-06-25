@@ -19,7 +19,7 @@ const objSchema = z.string({
 const requestListener = async (req, res) => {
   if (req.method === "GET") {
     const myUrl=new URL(req.url, `http://${req.headers.host}`);
-    const currency= myUrl.searchParams.get('CUR');
+    let currency= myUrl.searchParams.get('CUR');
    
     
     if(!currency){
@@ -52,7 +52,7 @@ const requestListener = async (req, res) => {
       })
       .on("end",async () => {
         const validatedBody= objSchema.parse(reqBody);
-        console.log(validatedBody);
+       
         res.setHeader("Content-Type", "application/json");
         res.writeHead(200);
         const postedProduct= await postData(productsData,validatedBody);
